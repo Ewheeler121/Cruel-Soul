@@ -9,7 +9,7 @@ pub mod display {
     use user32::MessageBoxA;
     use winapi::winuser::{MB_OK, MB_ICONINFORMATION, MB_ICONERROR};
 
-    pub fn information(title: &str, message: &str) -> String {
+    pub fn information(message: &str, title: &str) {
         let lp_text = CString::new(title).unwrap();
         let lp_caption = CString::new(message).unwrap();
 
@@ -21,11 +21,9 @@ pub mod display {
                 MB_OK | MB_ICONINFORMATION
             ); 
         }
-
-        format!("Printed Information\nTitle: {}\nMessage: {}", title, message)
     }
 
-    pub fn error(title: &str, message: &str) -> String {
+    pub fn error(message: &str, title: &str) {
         let lp_text = CString::new(title).unwrap();
         let lp_caption = CString::new(message).unwrap();
 
@@ -37,8 +35,6 @@ pub mod display {
                 MB_OK | MB_ICONERROR
             ); 
         }
-
-        format!("Printed Error\nTitle: {}\nMessage: {}", title, message)
     }
 }
 
@@ -46,13 +42,11 @@ pub mod display {
 pub mod display {
     use dialog_box;
 
-    pub fn information(title: &str, message: &str) -> String {
+    pub fn information(message: &str, title: &str) {
         dialog_box::information(&message);
-        format!("Printed Information\nTitle: {}\nMessage: {}", &title, &message)
     }
 
-    pub fn error(title: &str, message: &str) -> String {
+    pub fn error(message: &str, title: &str) {
         dialog_box::error(&message);
-        format!("Printed Information\nTitle: {}\nMessage: {}", &title, &message)
     }
 }

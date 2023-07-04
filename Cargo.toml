@@ -1,9 +1,12 @@
 [package]
-name = "cruded_re-animation"
-version = "1.1.0"
+name = "cruel_soul"
 edition = "2021"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+version = "1.1.0"
+authors = ["Ewheeler121 <ewheeler121@outlook.com>"]
+readme = "README.md"
+repository = "https://github.com/Ewheeler121/Cruel-Soul"
+build = "build.rs"
 
 [dependencies]
 serde = "1.0.166"

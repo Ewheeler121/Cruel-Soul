@@ -1,3 +1,5 @@
+#![windows_subsystem = "windows"]
+
 mod popup_box;
 
 use popup_box::display;
@@ -6,7 +8,7 @@ use serde_json::Value;
 
 #[cfg(target_os = "windows")]
 fn get_save_path() -> String {
-let appdata_path = match std::env::var("APPDATA") {
+let appdata_path: String = match std::env::var("APPDATA") {
         Ok(path) => path,
         Err(_) => {
             display::error("Pathing Error", "Could not find APPDATA");
@@ -18,7 +20,7 @@ let appdata_path = match std::env::var("APPDATA") {
 
 #[cfg(target_os = "linux")]
 fn get_save_path() -> String {
-    let home_path = match std::env::var("HOME") {
+    let home_path: String = match std::env::var("HOME") {
         Ok(path) => path,
         Err(_) => {
             display::error("Pathing Error", "Could not find HOME");
@@ -59,18 +61,13 @@ fn main() {
     };
     let mut save_data: Value = parse_save_data(save_data_file);
 
-    if save_data["soul"] == true {
+    if save_data["soul"] == true && save_data["husk"] == false {
         display::information("wtf?", "You already have a Soul");
         return;
     }
-    
-   if let Some(field) = save_data.get_mut("soul") {
-        *field = Value::Bool(true);
-    }
 
-    if let Some(field) = save_data.get_mut("husk") {
-        *field = Value::Bool(false);
-    }
+    *save_data.get_mut("soul").unwrap() = Value::Bool(true);
+    *save_data.get_mut("husk").unwrap() = Value::Bool(false);
 
     save_data_file = match File::create(get_save_path()) {
         Ok(file) => file,

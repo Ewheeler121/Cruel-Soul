@@ -3,7 +3,7 @@
 version = 3
 
 [[package]]
-name = "cruded_re-animation"
+name = "cruel_soul"
 version = "1.1.0"
 dependencies = [
  "dialog-box",
