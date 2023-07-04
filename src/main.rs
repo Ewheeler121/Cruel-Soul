@@ -65,9 +65,11 @@ fn main() {
     }
     
    if let Some(field) = save_data.get_mut("soul") {
-        if let Some(bool_value) = field.as_bool() {
-            *field = Value::Bool(!bool_value);
-        }
+        *field = Value::Bool(true);
+    }
+
+    if let Some(field) = save_data.get_mut("husk") {
+        *field = Value::Bool(false);
     }
 
     save_data_file = match File::create(get_save_path()) {
