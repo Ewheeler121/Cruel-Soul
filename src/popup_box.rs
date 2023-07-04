@@ -9,9 +9,9 @@ pub mod display {
     use user32::MessageBoxA;
     use winapi::winuser::{MB_OK, MB_ICONINFORMATION, MB_ICONERROR};
 
-    pub fn information(message: &str, title: &str) {
-        let lp_text = CString::new(title).unwrap();
-        let lp_caption = CString::new(message).unwrap();
+    pub fn information(title: &str, message: &str) {
+        let lp_text = CString::new(message).unwrap();
+        let lp_caption = CString::new(title).unwrap();
 
         unsafe {
             MessageBoxA(
@@ -42,11 +42,11 @@ pub mod display {
 pub mod display {
     use dialog_box;
 
-    pub fn information(message: &str, title: &str) {
+    pub fn information(title: &str, message: &str) {
         dialog_box::information(&message);
     }
 
-    pub fn error(message: &str, title: &str) {
+    pub fn error(title: &str, message: &str) {
         dialog_box::error(&message);
     }
 }
