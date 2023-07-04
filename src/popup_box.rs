@@ -1,7 +1,10 @@
-extern crate user32;
-extern crate winapi;
-
+//thank you random blogger
+//https://wesleywiser.github.io/post/rust-windows-messagebox-hello-world/    
+#[cfg(target_os = "windows")]
 pub mod display {
+    extern crate user32;
+    extern crate winapi;
+
     use std::ffi::CString;
     use user32::MessageBoxA;
     use winapi::winuser::{MB_OK, MB_ICONINFORMATION, MB_ICONERROR};
@@ -39,3 +42,17 @@ pub mod display {
     }
 }
 
+#[cfg(target_os = "linux")]
+pub mod display {
+    use dialog_box;
+
+    pub fn information(title: &str, message: &str) -> String {
+        dialog_box::information(&message);
+        format!("Printed Information\nTitle: {}\nMessage: {}", &title, &message)
+    }
+
+    pub fn error(title: &str, message: &str) -> String {
+        dialog_box::error(&message);
+        format!("Printed Information\nTitle: {}\nMessage: {}", &title, &message)
+    }
+}

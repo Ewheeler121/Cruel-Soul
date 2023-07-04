@@ -1,9 +1,10 @@
-mod dialog_box;
+mod popup_box;
 
-use dialog_box::display;
+use popup_box::display;
 use std::{fs::File, io::Read};
 use serde_json::Value;
 
+#[cfg(target_os = "windows")]
 fn get_save_path() -> String {
 let appdata_path = match std::env::var("APPDATA") {
         Ok(path) => path,
@@ -12,8 +13,20 @@ let appdata_path = match std::env::var("APPDATA") {
             panic!();
         }
     };
+    format!("{}\\Godot\\app_userdata\\Cruelty Squad\\savegame.save", appdata_path)
+}
 
-format!("{}\\Godot\\app_userdata\\Cruelty Squad\\savegame.save", appdata_path)    
+#[cfg(target_os = "linux")]
+fn get_save_path() -> String {
+    let home_path = match std::env::var("HOME") {
+        Ok(path) => path,
+        Err(_) => {
+            display::error("Pathing Error", "Could not find HOME");
+            panic!();
+        }
+    };
+
+    format!("{}/.steam/debian-installation/steamapps/compatdata/1388770/pfx/drive_c/users/steamuser/AppData/Roaming/Godot/app_userdata/Cruelty Squad/savegame.save", home_path)
 }
 
 fn parse_save_data(mut save_file: File) -> Value {
@@ -39,6 +52,7 @@ fn main() {
     let mut save_data_file: File = match File::open(get_save_path()) { 
         Ok(file) => file,
         Err(_) => {
+            println!("{}", get_save_path());
             display::error("File Error", "Could not open Save File to Read");
             panic!();
         }
