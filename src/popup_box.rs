@@ -42,11 +42,11 @@ pub mod display {
 pub mod display {
     use dialog_box;
 
-    pub fn information(title: &str, message: &str) {
+    pub fn information(_title: &str, message: &str) {
         dialog_box::information(&message);
     }
 
-    pub fn error(title: &str, message: &str) {
+    pub fn error(_title: &str, message: &str) {
         dialog_box::error(&message);
     }
 }
