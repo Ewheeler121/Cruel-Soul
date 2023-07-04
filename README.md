@@ -1,2 +1,3 @@
-#For The Game Cruelty Squad
-###simple program that takes in the .save file for the game to get your devine light back
+# For The Game Cruelty Squad
+
+### Simple program to retrieve your Divine Light from the .save file
