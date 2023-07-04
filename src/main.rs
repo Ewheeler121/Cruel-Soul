@@ -27,7 +27,6 @@ fn get_save_path() -> String {
             panic!();
         }
     };
-
     format!("{}/.steam/debian-installation/steamapps/compatdata/1388770/pfx/drive_c/users/steamuser/AppData/Roaming/Godot/app_userdata/Cruelty Squad/savegame.save", home_path)
 }
 
@@ -35,7 +34,7 @@ fn parse_save_data(mut save_file: File) -> Value {
     let mut save_data_string: String = String::new();
     match save_file.read_to_string(&mut save_data_string) {
         Ok(_) => (),
-        Err(_) => { 
+        Err(_) => {
             display::error("Parser Error", "Could not Read File");
             panic!();
         }
@@ -51,7 +50,7 @@ fn parse_save_data(mut save_file: File) -> Value {
 }
 
 fn main() {
-    let mut save_data_file: File = match File::open(get_save_path()) { 
+    let mut save_data_file: File = match File::open(get_save_path()) {
         Ok(file) => file,
         Err(_) => {
             println!("{}", get_save_path());
@@ -59,6 +58,7 @@ fn main() {
             panic!();
         }
     };
+
     let mut save_data: Value = parse_save_data(save_data_file);
 
     if save_data["soul"] == true && save_data["husk"] == false {

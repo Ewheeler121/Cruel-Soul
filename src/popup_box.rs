@@ -19,7 +19,7 @@ pub mod display {
                 lp_text.as_ptr(),
                 lp_caption.as_ptr(),
                 MB_OK | MB_ICONINFORMATION
-            ); 
+            );
         }
     }
 
@@ -33,7 +33,7 @@ pub mod display {
                 lp_text.as_ptr(),
                 lp_caption.as_ptr(),
                 MB_OK | MB_ICONERROR
-            ); 
+            );
         }
     }
 }
