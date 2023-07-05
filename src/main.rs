@@ -66,8 +66,9 @@ fn main() {
         return;
     }
 
-    *save_data.get_mut("soul").unwrap() = Value::Bool(true);
-    *save_data.get_mut("husk").unwrap() = Value::Bool(false);
+    *save_data.get_mut("soul").unwrap() = serde_json::json!(true);
+    *save_data.get_mut("husk").unwrap() = serde_json::json!(false);
+    *save_data.get_mut("consecutive_deaths").unwrap() = serde_json::json!(0);
 
     save_data_file = match File::create(get_save_path()) {
         Ok(file) => file,
