@@ -61,13 +61,14 @@ fn main() {
 
     let mut save_data: Value = parse_save_data(save_data_file);
 
-    if save_data["soul"] == true && save_data["husk"] == false {
+    if save_data["soul"] == true {
         display::information("wtf?", "You already have a Soul");
         return;
     }
 
     *save_data.get_mut("soul").unwrap() = serde_json::json!(true);
     *save_data.get_mut("husk").unwrap() = serde_json::json!(false);
+    *save_data.get_mut("hope").unwrap() = serde_json::json!(false);
     *save_data.get_mut("consecutive_deaths").unwrap() = serde_json::json!(0);
 
     save_data_file = match File::create(get_save_path()) {
